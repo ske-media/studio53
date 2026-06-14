@@ -6,7 +6,7 @@ export function Footer() {
     <footer className="border-t border-brand-darkGrey bg-osiris-black px-6 py-10 md:px-12 lg:px-20">
       <div className="mx-auto grid max-w-6xl grid-cols-3 items-center gap-6">
         <a href="#hero" aria-label="STUDIO 53 — Accueil">
-          <Logo className="h-6 w-auto" />
+          <Logo className="h-10 w-auto" />
         </a>
 
         <p className="text-center text-xs tracking-wide text-white/50">

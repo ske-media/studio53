@@ -2,11 +2,12 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { GlowCta } from "@/components/shared/GlowCta";
+import { HeroIntro } from "@/components/desktop/HeroIntro";
+import { HeroPitch } from "@/components/desktop/HeroPitch";
 
 /**
  * Hero Desktop — scrolltelling cinématique OSIRIS-53.
- * 3 étapes pilotées par la progression de scroll sur 300vh.
+ * Brume atmosphérique transparente (mix-blend-screen), 3 étapes sur 300vh.
  */
 export function HeroScroll() {
   const ref = useRef<HTMLElement>(null);
@@ -15,19 +16,25 @@ export function HeroScroll() {
     offset: ["start start", "end end"],
   });
 
-  const mistOpacity = useTransform(scrollYProgress, [0, 0.1, 0.5], [1, 1, 0]);
-  const mistY = useTransform(scrollYProgress, [0, 0.5], ["0%", "-12%"]);
+  const mistOpacity = useTransform(scrollYProgress, [0, 0.12, 0.5], [0.4, 0.34, 0]);
+  const mistY = useTransform(scrollYProgress, [0, 0.5], ["0%", "-18%"]);
+  const mistFarOpacity = useTransform(scrollYProgress, [0, 0.5], [0.18, 0]);
+  const mistFarY = useTransform(scrollYProgress, [0, 0.5], ["0%", "-34%"]);
 
   const introOpacity = useTransform(scrollYProgress, [0, 0.1, 0.4], [1, 1, 0]);
   const introY = useTransform(scrollYProgress, [0.1, 0.4], ["0%", "-70%"]);
+  const introScale = useTransform(scrollYProgress, [0, 0.4], [1, 1.06]);
 
   const videoOpacity = useTransform(scrollYProgress, [0.2, 0.6], [0, 1]);
-  const videoScale = useTransform(scrollYProgress, [0.2, 0.6], [1.1, 1]);
-  const videoBlur = useTransform(scrollYProgress, [0.2, 0.6], [20, 0]);
-  const videoFilter = useTransform(videoBlur, (b) => `blur(${b}px)`);
+  const videoScale = useTransform(scrollYProgress, [0.2, 0.6], [1.12, 1]);
+  const videoFilter = useTransform(
+    useTransform(scrollYProgress, [0.2, 0.6], [22, 0]),
+    (b) => `blur(${b}px)`,
+  );
+  const scrimOpacity = useTransform(scrollYProgress, [0.45, 0.7], [0, 0.6]);
 
-  const pitchOpacity = useTransform(scrollYProgress, [0.6, 0.82], [0, 1]);
-  const pitchY = useTransform(scrollYProgress, [0.6, 0.82], ["48px", "0px"]);
+  const pitchOpacity = useTransform(scrollYProgress, [0.62, 0.84], [0, 1]);
+  const pitchY = useTransform(scrollYProgress, [0.62, 0.84], ["56px", "0px"]);
 
   return (
     <section
@@ -54,49 +61,51 @@ export function HeroScroll() {
           </video>
         </motion.div>
 
+        <motion.img
+          aria-hidden
+          src="/hero/clouds-overlay.webp"
+          alt=""
+          style={{ opacity: mistFarOpacity, y: mistFarY }}
+          animate={{ x: ["-3%", "3%", "-3%"] }}
+          transition={{ duration: 36, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-0 h-full w-full scale-125 object-cover mix-blend-screen blur-md"
+        />
+        <motion.img
+          aria-hidden
+          src="/hero/clouds-overlay.webp"
+          alt=""
+          style={{ opacity: mistOpacity, y: mistY }}
+          animate={{ x: ["2%", "-2%", "2%"] }}
+          transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-0 h-full w-full scale-110 object-cover mix-blend-screen"
+        />
+
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.85) 100%)",
+          }}
+        />
         <motion.div
           aria-hidden
-          style={{ opacity: mistOpacity, y: mistY }}
-          className="absolute inset-0"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/hero/clouds-overlay.webp"
-            alt=""
-            className="h-full w-full object-cover"
-          />
-        </motion.div>
+          style={{ opacity: scrimOpacity }}
+          className="absolute inset-0 bg-black"
+        />
 
         <motion.div
-          style={{ opacity: introOpacity, y: introY }}
+          style={{ opacity: introOpacity, y: introY, scale: introScale }}
           className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center"
         >
-          <p className="text-xs font-medium tracking-[0.4em] text-osiris-copper uppercase">
-            Disruptive by Nature
-          </p>
-          <h1 className="mt-6 max-w-4xl text-5xl font-light tracking-tight md:text-7xl">
-            La photo immobilière ne suffit plus.
-          </h1>
+          <HeroIntro />
         </motion.div>
 
         <motion.div
           style={{ opacity: pitchOpacity, y: pitchY }}
           className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center"
         >
-          <h2 className="max-w-4xl text-4xl font-light tracking-tight md:text-6xl">
-            Vos mandats exclusifs méritent le grand écran.
-          </h2>
-          <p className="mt-6 max-w-xl text-base text-white/60">
-            Nous transformons vos simples photos en productions hollywoodiennes
-            grâce à l&apos;intelligence artificielle. Une qualité studio
-            indétectable, livrée en 10 jours.
-          </p>
-          <div className="mt-10">
-            <GlowCta className="py-4">Mettre mon mandat à l&apos;épreuve</GlowCta>
-          </div>
-          <p className="mt-4 text-xs tracking-wide text-white/40">
-            Teaser de 8 secondes offert
-          </p>
+          <HeroPitch />
         </motion.div>
       </div>
     </section>

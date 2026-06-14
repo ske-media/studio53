@@ -12,10 +12,10 @@ export function MobileNavbar() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-osiris-black/90">
       <nav
         aria-label="Navigation principale"
-        className="flex h-14 items-center justify-between px-5"
+        className="flex h-16 items-center justify-between px-5"
       >
         <a href="#hero" aria-label="STUDIO 53 — Accueil">
-          <Logo className="h-6 w-auto" />
+          <Logo className="h-9 w-auto" />
         </a>
         <ul className="flex gap-4 overflow-x-auto">
           {NAV_ANCHORS.map(({ href, label }) => (

@@ -13,7 +13,7 @@ export default function ClientPortalPage() {
         aria-labelledby="portal-title"
         className="w-full max-w-sm text-center"
       >
-        <Logo className="mx-auto h-7 w-auto" />
+        <Logo className="mx-auto h-14 w-auto" />
 
         <h1 id="portal-title" className="mt-10 text-2xl font-light tracking-tight">
           Espace de livraison sécurisé

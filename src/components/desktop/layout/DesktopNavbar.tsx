@@ -12,10 +12,10 @@ export function DesktopNavbar() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-osiris-black/80 backdrop-blur-md">
       <nav
         aria-label="Navigation principale"
-        className="mx-auto flex h-16 max-w-7xl items-center justify-between px-8"
+        className="mx-auto flex h-20 max-w-7xl items-center justify-between px-8"
       >
         <a href="#hero" aria-label="STUDIO 53 — Accueil">
-          <Logo className="h-7 w-auto" />
+          <Logo className="h-12 w-auto" />
         </a>
         <ul className="flex items-center gap-10">
           {NAV_ANCHORS.map(({ href, label }) => (

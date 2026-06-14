@@ -29,7 +29,7 @@ export default async function LandingPriveePage({ params }: TeaserPageProps) {
   return (
     <main className="min-h-dvh bg-osiris-black px-6 py-12 md:px-12">
       <header className="mx-auto flex max-w-5xl items-center justify-between">
-        <Logo className="h-6 w-auto" />
+        <Logo className="h-10 w-auto" />
         <span className="text-[10px] tracking-[0.3em] text-white/40 uppercase">
           Salle de projection privée
         </span>
