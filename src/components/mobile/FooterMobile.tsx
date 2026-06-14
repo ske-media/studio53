@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Logo } from "@/components/shared/Logo";
 
 export function FooterMobile() {
@@ -9,12 +10,12 @@ export function FooterMobile() {
       <p className="mt-3 text-xs tracking-wide text-white/50">
         Disruptive by nature.
       </p>
-      <a
+      <Link
         href="/client-portal"
         className="mt-5 inline-block rounded-full border border-brand-darkGrey px-4 py-2 text-[11px] tracking-wide text-white/70"
       >
         Espace Client
-      </a>
+      </Link>
       <p className="mt-5 text-[11px] text-white/35">
         © {new Date().getFullYear()} Studio 53 · Mentions légales
       </p>

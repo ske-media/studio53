@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { CinematicPlayer } from "@/components/shared/CinematicPlayer";
 import { Logo } from "@/components/shared/Logo";
 import { buildTeaserMetadata } from "@/lib/metadata";
@@ -62,12 +63,12 @@ export default async function LandingPriveePage({ params }: TeaserPageProps) {
           vendre ce bien en exclusivité.
         </p>
         <div className="mt-8 flex flex-col items-center gap-4">
-          <a
+          <Link
             href="/#contact"
             className="orange-glow inline-flex min-h-12 items-center justify-center rounded-full bg-osiris-copper px-8 text-sm font-medium text-osiris-black"
           >
             Commander le film complet (60s — 5&apos;000 CHF)
-          </a>
+          </Link>
           <a
             href="mailto:studio@studio53.com?subject=Discussion projet"
             className="text-xs tracking-wide text-white/55 underline-offset-4 hover:text-osiris-copper hover:underline"

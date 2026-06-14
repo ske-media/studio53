@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Logo } from "@/components/shared/Logo";
 
 export function Footer() {
@@ -16,12 +17,12 @@ export function Footer() {
           <span className="text-[11px] text-white/35">
             © {new Date().getFullYear()} Studio 53 · Mentions légales
           </span>
-          <a
+          <Link
             href="/client-portal"
             className="rounded-full border border-brand-darkGrey px-4 py-2 text-[11px] tracking-wide text-white/70 transition-colors hover:border-osiris-copper hover:text-osiris-copper"
           >
             Espace Client
-          </a>
+          </Link>
         </div>
       </div>
     </footer>
