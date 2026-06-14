@@ -1,20 +1,21 @@
 "use client";
 
-import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useTeaserForm } from "@/lib/useTeaserForm";
 
 const INPUT =
   "w-full min-h-12 rounded-xl border border-brand-darkGrey bg-black/40 px-4 text-sm text-osiris-white outline-none transition-colors placeholder:text-white/40 focus:border-osiris-copper";
-
+const BTN =
+  "min-h-12 w-full rounded-full bg-osiris-copper text-sm font-medium text-osiris-black disabled:opacity-60";
 const variants = {
-  enter: (dir: number) => ({ opacity: 0, x: dir * 60 }),
+  enter: { opacity: 0, x: 60 },
   center: { opacity: 1, x: 0 },
-  exit: (dir: number) => ({ opacity: 0, x: dir * -60 }),
+  exit: { opacity: 0, x: -60 },
 };
 
 export function FormulaireMobile() {
-  const [step, setStep] = useState<1 | 2>(1);
-  const [done, setDone] = useState(false);
+  const { step, listingUrl, isSubmitting, error, done, goStep2, submit } =
+    useTeaserForm();
 
   return (
     <section
@@ -44,20 +45,16 @@ export function FormulaireMobile() {
             </p>
           </div>
         ) : (
-          <AnimatePresence mode="wait" custom={1}>
+          <AnimatePresence mode="wait">
             {step === 1 ? (
               <motion.form
                 key="step1"
-                custom={1}
                 variants={variants}
                 initial="enter"
                 animate="center"
                 exit="exit"
                 transition={{ duration: 0.35, ease: "easeOut" }}
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setStep(2);
-                }}
+                onSubmit={goStep2}
               >
                 <h2 className="text-2xl font-light tracking-tight">
                   Mettez-nous à l&apos;épreuve.
@@ -67,30 +64,25 @@ export function FormulaireMobile() {
                 </p>
                 <input
                   type="url"
+                  name="listing-url"
                   required
+                  defaultValue={listingUrl}
                   className={`${INPUT} mt-6`}
                   placeholder="Lien de votre annonce"
                 />
-                <button
-                  type="submit"
-                  className="mt-5 min-h-12 w-full rounded-full bg-osiris-copper text-sm font-medium text-osiris-black"
-                >
+                <button type="submit" className={`${BTN} mt-5`}>
                   Évaluer mon mandat
                 </button>
               </motion.form>
             ) : (
               <motion.form
                 key="step2"
-                custom={1}
                 variants={variants}
                 initial="enter"
                 animate="center"
                 exit="exit"
                 transition={{ duration: 0.35, ease: "easeOut" }}
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setDone(true);
-                }}
+                onSubmit={submit}
               >
                 <h2 className="text-2xl font-light tracking-tight">
                   Dossier sécurisé.
@@ -100,22 +92,30 @@ export function FormulaireMobile() {
                 </p>
                 <input
                   type="text"
+                  name="agency"
                   required
                   className={`${INPUT} mt-6`}
                   placeholder="Nom de l'agence"
                 />
                 <input
                   type="email"
+                  name="email"
                   required
                   className={`${INPUT} mt-3`}
                   placeholder="Email professionnel"
                 />
                 <button
                   type="submit"
-                  className="orange-glow mt-5 min-h-12 w-full rounded-full bg-osiris-copper text-sm font-medium text-osiris-black"
+                  disabled={isSubmitting}
+                  className={`orange-glow ${BTN} mt-5`}
                 >
-                  Recevoir mon film gratuit
+                  {isSubmitting ? "Envoi en cours…" : "Recevoir mon film gratuit"}
                 </button>
+                {error && (
+                  <p className="mt-3 text-center text-[11px] text-red-400">
+                    Une erreur est survenue. Merci de réessayer.
+                  </p>
+                )}
                 <p className="mt-3 text-center text-[11px] text-white/40">
                   Zéro engagement. NDA automatique dès soumission.
                 </p>

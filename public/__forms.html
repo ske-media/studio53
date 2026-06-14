@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Netlify Forms — détection statique STUDIO 53</title>
+  </head>
+  <body>
+    <!--
+      Formulaires statiques détectés par Netlify au build.
+      Les composants React soumettent ici via fetch (URL-encoded + form-name).
+      Les champs doivent correspondre exactement à ceux envoyés côté client.
+    -->
+    <form name="teaser" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="teaser" />
+      <input type="text" name="bot-field" />
+      <input type="url" name="listing-url" />
+      <input type="text" name="agency" />
+      <input type="email" name="email" />
+    </form>
+
+    <form name="lead-magnet" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="lead-magnet" />
+      <input type="text" name="bot-field" />
+      <input type="email" name="email" />
+    </form>
+  </body>
+</html>

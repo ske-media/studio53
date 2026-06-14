@@ -1,14 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { GlowCta } from "@/components/shared/GlowCta";
+
+const FALLBACK_IMG = "/hero/hero-bg-mobile.jpg";
 
 /**
  * Hero Mobile — affichage immédiat, LCP < 1.5s.
- * Vidéo de fond + CTA sticky au pouce dès le premier scroll.
+ * Résilient au blocage d'autoplay (mode Économie d'énergie iOS/Android).
  */
 export function HeroMobile() {
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [autoplayFailed, setAutoplayFailed] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const attempt = video.play();
+    if (attempt) attempt.catch(() => setAutoplayFailed(true));
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
@@ -24,16 +35,27 @@ export function HeroMobile() {
       className="relative min-h-dvh overflow-hidden"
     >
       <video
-        className="absolute inset-0 h-full w-full object-cover"
+        ref={videoRef}
+        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${autoplayFailed ? "opacity-0" : "opacity-100"}`}
         autoPlay
         loop
         muted
         playsInline
         preload="auto"
-        poster="/hero/hero-bg-mobile.jpg"
+        poster={FALLBACK_IMG}
       >
         <source src="/hero/hero-bg-mobile.mp4" type="video/mp4" />
       </video>
+
+      {autoplayFailed && (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img
+          src={FALLBACK_IMG}
+          alt=""
+          aria-hidden
+          className="absolute inset-0 h-full w-full object-cover opacity-100 transition-opacity duration-700"
+        />
+      )}
 
       <div className="absolute inset-0 bg-black/40" aria-hidden />
 

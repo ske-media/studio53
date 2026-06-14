@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useTeaserForm } from "@/lib/useTeaserForm";
 
 const INPUT =
   "w-full rounded-xl border border-brand-darkGrey bg-black/40 px-5 py-4 text-sm text-osiris-white outline-none transition-colors placeholder:text-white/40 focus:border-osiris-copper";
@@ -13,8 +13,8 @@ const variants = {
 };
 
 export function TeaserForm() {
-  const [step, setStep] = useState<1 | 2>(1);
-  const [done, setDone] = useState(false);
+  const { step, listingUrl, isSubmitting, error, done, goStep2, submit } =
+    useTeaserForm();
 
   if (done) {
     return (
@@ -37,10 +37,7 @@ export function TeaserForm() {
           animate="center"
           exit="exit"
           transition={{ duration: 0.4, ease: "easeOut" }}
-          onSubmit={(e) => {
-            e.preventDefault();
-            setStep(2);
-          }}
+          onSubmit={goStep2}
         >
           <h2 className="text-4xl font-light tracking-tight">
             Mettez-nous à l&apos;épreuve.
@@ -51,7 +48,9 @@ export function TeaserForm() {
           </p>
           <input
             type="url"
+            name="listing-url"
             required
+            defaultValue={listingUrl}
             className={`${INPUT} mt-8`}
             placeholder="Collez le lien de votre annonce (Sotheby's, Barnes, SeLoger…)"
           />
@@ -73,10 +72,7 @@ export function TeaserForm() {
           animate="center"
           exit="exit"
           transition={{ duration: 0.4, ease: "easeOut" }}
-          onSubmit={(e) => {
-            e.preventDefault();
-            setDone(true);
-          }}
+          onSubmit={submit}
         >
           <h2 className="text-4xl font-light tracking-tight">Dossier sécurisé.</h2>
           <p className="mt-4 text-sm text-white/60">
@@ -84,22 +80,30 @@ export function TeaserForm() {
           </p>
           <input
             type="text"
+            name="agency"
             required
             className={`${INPUT} mt-8`}
             placeholder="Nom de l'agence"
           />
           <input
             type="email"
+            name="email"
             required
             className={`${INPUT} mt-4`}
             placeholder="Votre Email professionnel"
           />
           <button
             type="submit"
-            className="orange-glow mt-8 w-full rounded-full bg-osiris-copper py-4 text-sm font-medium text-osiris-black"
+            disabled={isSubmitting}
+            className="orange-glow mt-8 w-full rounded-full bg-osiris-copper py-4 text-sm font-medium text-osiris-black disabled:opacity-60"
           >
-            Recevoir mon film gratuit
+            {isSubmitting ? "Envoi en cours…" : "Recevoir mon film gratuit"}
           </button>
+          {error && (
+            <p className="mt-3 text-center text-[11px] text-red-400">
+              Une erreur est survenue. Merci de réessayer.
+            </p>
+          )}
           <p className="mt-4 text-center text-[11px] text-white/40">
             Zéro engagement. Signature de NDA automatique dès soumission.
           </p>
