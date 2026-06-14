@@ -1,8 +1,10 @@
+import { Logo } from "@/components/shared/Logo";
+
 export function FooterMobile() {
   return (
     <footer className="border-t border-brand-darkGrey bg-osiris-black px-5 py-8 text-center">
-      <a href="#hero" className="text-sm font-medium tracking-[0.2em] uppercase">
-        Studio <span className="text-osiris-copper">53</span>
+      <a href="#hero" aria-label="STUDIO 53 — Accueil" className="inline-block">
+        <Logo className="mx-auto h-6 w-auto" />
       </a>
       <p className="mt-3 text-xs tracking-wide text-white/50">
         Disruptive by nature.

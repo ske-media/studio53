@@ -1,3 +1,5 @@
+import { Logo } from "@/components/shared/Logo";
+
 const NAV_ANCHORS = [
   { href: "#hero", label: "Accueil" },
   { href: "#expertise", label: "Expertise" },
@@ -12,8 +14,8 @@ export function MobileNavbar() {
         aria-label="Navigation principale"
         className="flex h-14 items-center justify-between px-5"
       >
-        <a href="#hero" className="text-xs font-medium tracking-[0.15em] uppercase">
-          Studio <span className="text-osiris-copper">53</span>
+        <a href="#hero" aria-label="STUDIO 53 — Accueil">
+          <Logo className="h-6 w-auto" />
         </a>
         <ul className="flex gap-4 overflow-x-auto">
           {NAV_ANCHORS.map(({ href, label }) => (

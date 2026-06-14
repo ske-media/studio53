@@ -10,7 +10,7 @@ export function LeadMagnet() {
       <div className="mx-auto flex max-w-5xl items-center gap-12 rounded-2xl border border-brand-darkGrey p-10">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/about/guide-mockup.webp"
+          src="/brand/guide-mockup.webp"
           alt="Le Manuel du Mandat Exclusif"
           className="w-44 shrink-0 rounded-lg object-cover"
         />

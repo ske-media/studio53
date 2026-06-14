@@ -1,9 +1,11 @@
+import { Logo } from "@/components/shared/Logo";
+
 export function Footer() {
   return (
     <footer className="border-t border-brand-darkGrey bg-osiris-black px-6 py-10 md:px-12 lg:px-20">
       <div className="mx-auto grid max-w-6xl grid-cols-3 items-center gap-6">
-        <a href="#hero" className="text-sm font-medium tracking-[0.2em] uppercase">
-          Studio <span className="text-osiris-copper">53</span>
+        <a href="#hero" aria-label="STUDIO 53 — Accueil">
+          <Logo className="h-6 w-auto" />
         </a>
 
         <p className="text-center text-xs tracking-wide text-white/50">

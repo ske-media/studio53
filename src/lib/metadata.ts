@@ -10,13 +10,17 @@ export const baseMetadata: Metadata = {
   },
   description:
     "STUDIO 53 conçoit des expériences digitales premium pour les courtiers en immobilier de luxe.",
+  icons: {
+    icon: "/brand/favicon.ico",
+    apple: "/brand/apple-touch-icon.png",
+  },
   openGraph: {
     type: "website",
     locale: "fr_FR",
     siteName: "STUDIO 53",
     images: [
       {
-        url: "/og/default.jpg",
+        url: "/seo/og-preview.jpg",
         width: 1200,
         height: 630,
         alt: "STUDIO 53",
@@ -46,7 +50,7 @@ export function buildTeaserMetadata({
   description,
   imageUrl,
 }: TeaserMetadataInput): Metadata {
-  const ogImage = imageUrl ?? `/og/teasers/${id}.jpg`;
+  const ogImage = imageUrl ?? `/seo/og-preview.jpg`;
 
   return {
     title,

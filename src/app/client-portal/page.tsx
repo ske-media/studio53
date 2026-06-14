@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Logo } from "@/components/shared/Logo";
 
 export const metadata: Metadata = {
   title: "Espace Client",
@@ -12,9 +13,7 @@ export default function ClientPortalPage() {
         aria-labelledby="portal-title"
         className="w-full max-w-sm text-center"
       >
-        <span className="text-lg font-medium tracking-[0.2em] uppercase">
-          Studio <span className="text-osiris-copper">53</span>
-        </span>
+        <Logo className="mx-auto h-7 w-auto" />
 
         <h1 id="portal-title" className="mt-10 text-2xl font-light tracking-tight">
           Espace de livraison sécurisé

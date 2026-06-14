@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CinematicPlayer } from "@/components/shared/CinematicPlayer";
+import { Logo } from "@/components/shared/Logo";
 import { buildTeaserMetadata } from "@/lib/metadata";
 import { getTeaser } from "@/lib/teasers";
 
@@ -27,9 +28,7 @@ export default async function LandingPriveePage({ params }: TeaserPageProps) {
   return (
     <main className="min-h-dvh bg-osiris-black px-6 py-12 md:px-12">
       <header className="mx-auto flex max-w-5xl items-center justify-between">
-        <span className="text-sm font-medium tracking-[0.2em] uppercase">
-          Studio <span className="text-osiris-copper">53</span>
-        </span>
+        <Logo className="h-6 w-auto" />
         <span className="text-[10px] tracking-[0.3em] text-white/40 uppercase">
           Salle de projection privée
         </span>

@@ -1,3 +1,5 @@
+import { Logo } from "@/components/shared/Logo";
+
 const NAV_ANCHORS = [
   { href: "#hero", label: "Accueil" },
   { href: "#expertise", label: "Expertise" },
@@ -12,8 +14,8 @@ export function DesktopNavbar() {
         aria-label="Navigation principale"
         className="mx-auto flex h-16 max-w-7xl items-center justify-between px-8"
       >
-        <a href="#hero" className="text-sm font-medium tracking-[0.2em] uppercase">
-          Studio <span className="text-osiris-copper">53</span>
+        <a href="#hero" aria-label="STUDIO 53 — Accueil">
+          <Logo className="h-7 w-auto" />
         </a>
         <ul className="flex items-center gap-10">
           {NAV_ANCHORS.map(({ href, label }) => (

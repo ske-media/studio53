@@ -10,7 +10,7 @@ export function LeadMagnetMobile() {
       <div className="rounded-2xl border border-brand-darkGrey p-6">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/about/guide-mockup.webp"
+          src="/brand/guide-mockup.webp"
           alt="Le Manuel du Mandat Exclusif"
           className="mx-auto w-32 rounded-lg object-cover"
         />
